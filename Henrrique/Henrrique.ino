@@ -1,8 +1,9 @@
 #include <dht11.h>
-#include<LiquidCrystal.h>
+dht11 DHT;
 
+#include<LiquidCrystal.h>
 LiquidCrystal lcd(8,9,10,11,12,13);
-dht11 dht;
+
 
 //var
 int P=6; //POWER SWITCH
@@ -55,8 +56,13 @@ void loop()
     Temperature();
     POWER();
     Light();
+    delay(2000);
+    lcd.clear();
+    
     HUMIDITY();
-    delay(3000);
+    delay(2000);
+    lcd.clear();
+    
 }
 
 
@@ -67,21 +73,20 @@ void Light()
   float volts_lig=((Light_value/1023.0)*5);
   int LIGHT=500/(4*((5-volts_lig)/volts_lig));
   lcd.setCursor(6,0); // column, row
-  lcd.print("L:");
+  lcd.print("Lux:");
   lcd.print(LIGHT);
-  lcd.print("lx");
-  delay(2000);
-  lcd.clear();
 }
 
 ///////////////Humidity//////////////////
 
 void HUMIDITY()
 {
-  int chk = dht.read(H);
-  float HUM = dht.humidity;
+  int chk = DHT.read(H);
+  float HUM = DHT.humidity;
+  lcd.clear();
   lcd.setCursor(9,0);
   lcd.print("H:");
   lcd.print(HUM);
   lcd.print("%");
+
 }
