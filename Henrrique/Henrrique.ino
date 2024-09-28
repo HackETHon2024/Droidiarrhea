@@ -1,24 +1,19 @@
-#include <DHT.h>
+#include <dht11.h>
 #include<LiquidCrystal.h>
 
-#define H A5       // Define the pin where the sensor is connected
-#define DHTTYPE DHT11  // Define the type of sensor used
-
-// def
 LiquidCrystal lcd(8,9,10,11,12,13);
-DHT dht(H, DHTTYPE);
+dht11 dht;
 
 //var
 int P=6; //POWER SWITCH
 int T=A2; // A2 has already been defined as Analog Pin 2 in arduino lib
 int L=A4; // A4 has already been defined as Analog Pin 4 in arduino lib
-// int H=A5; // A5 has already been defined as Analog Pin 5 in arduino lib
+int H=A5; // A5 has already been defined as Analog Pin 5 in arduino lib
 
 void setup()
 {
    lcd.begin(16,2);
    pinMode(P, INPUT);
-   dht.begin();
 
 }
 
@@ -84,9 +79,9 @@ void Light()
 void HUMIDITY()
 {
   int chk = dht.read(H);
-  float HUM;
-  HUM = dht.readHumidity();
+  float HUM = dht.humidity;
   lcd.setCursor(9,0);
   lcd.print("H:");
   lcd.print(HUM);
+  lcd.print("%");
 }
