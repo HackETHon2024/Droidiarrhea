@@ -50,7 +50,7 @@ void loop()
     Temperature();
     POWER();
     Light();
-    delay(3000);
+    delay(2500);
 }
 
 
