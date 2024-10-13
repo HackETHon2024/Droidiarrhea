@@ -19,8 +19,8 @@ log_count = 1
 SerialObj = serial.Serial('/dev/ttyUSB0',9600)
 # Both Arduino and Python are sharing the serial port
 # Opening the serial port from python will reset the arduino
-# 3 second delay will allow the Arduino to settle down
-time.sleep(3)
+# 5 second delay will allow the Arduino to settle down
+time.sleep(5)
 
 # Log continuously to a file by querying the arduino
 
@@ -48,7 +48,7 @@ while 1:
     print(log_file_text3)
     log_count = log_count + 1
 
-    time.sleep(1) # sensing interval
+    time.sleep(10) # sensing interval every 10 seconds
 
 SerialObj.close() # close the port
 
