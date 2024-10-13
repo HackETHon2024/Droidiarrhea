@@ -1,3 +1,5 @@
+
+// INCLUDES
 #include <dht11.h>
 dht11 DHT;
 
@@ -20,6 +22,7 @@ void setup()
    pinMode(P, INPUT);
    pinMode(R, INPUT);
    pinMode(X, INPUT);
+   Serial.begin(9600);
 
 }
 
@@ -30,10 +33,12 @@ void TEMPERATURE()
   int value_temp=analogRead(T); //reading from A2 pin
   delay(10);
   float milivolts_temp=((value_temp/1024.0)*5000); // (sensor reading)/ADC*Voltage
-  float CELSIUS=milivolts_temp/10;
+  float CELSIUS=milivolts_temp/10.0;
   lcd.setCursor(0,0); // column, row
   lcd.print("Temp:");
   lcd.print(CELSIUS);
+  Serial.print(CELSIUS);
+  Serial.print(",");
 }
 
 ////////////////Light////////////////
@@ -46,6 +51,8 @@ void LIGHT()
   lcd.print("Light:");
   lcd.print(LIGHT);
   lcd.print(" lux");
+  Serial.print("Light:");
+  Serial.print(",");
 }
 
 ///////////////Humidity//////////////////
@@ -82,6 +89,8 @@ void POWER()
         lcd.print("Power:");
         lcd.print("Off");
     }
+    Serial.print(P);
+    Serial.print(",");
 }
 
 // Reed Switch (Magnet)
@@ -98,6 +107,8 @@ void REED()
     lcd.setCursor(0,0);
     lcd.print("Magnet:No");
   }
+  Serial.print(R);
+  Serial.print(",");
 }
 
 // Infra Red Sensor
@@ -113,21 +124,18 @@ void PIR()
     lcd.setCursor(0,1);
     lcd.print("Human:Yes");
    }
+   Serial.print(X);
+   Serial.print(",");
+   Serial.println();
 }
+// LCD Function
+
 
 ///////////////Main funtion///////////////
 
 void loop()
-
 {
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print("Internet of Wild");
-  lcd.setCursor(0,1);
-  lcd.print("Animals");
-  delay(2000);
-  lcd.clear();
-  while(1)
+while(1)
   {
     POWER();
     delay(1000);
@@ -149,7 +157,5 @@ void loop()
     delay(1000);
     lcd.clear();
     
-    //HUMIDITY();
   }
-    
 }
