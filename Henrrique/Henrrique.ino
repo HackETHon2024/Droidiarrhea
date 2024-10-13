@@ -51,7 +51,7 @@ void LIGHT()
   lcd.print("Light:");
   lcd.print(LIGHT);
   lcd.print(" lux");
-  Serial.print("Light:");
+  Serial.print(LIGHT);
   Serial.print(",");
 }
 
@@ -89,8 +89,8 @@ void POWER()
         lcd.print("Power:");
         lcd.print("Off");
     }
-    Serial.print(P);
-    Serial.print(",");
+//    Serial.print(P);
+//    Serial.print(",");
 }
 
 // Reed Switch (Magnet)
@@ -101,13 +101,14 @@ void REED()
   {
     lcd.setCursor(0,1);
     lcd.print("Magnet:Yes");
+    Serial.print(1);
   }
   else
   {
     lcd.setCursor(0,0);
     lcd.print("Magnet:No");
+    Serial.print(0);
   }
-  Serial.print(R);
   Serial.print(",");
 }
 
@@ -118,17 +119,18 @@ void PIR()
    {
     lcd.setCursor(0,0);
     lcd.print("Human:No");
+    Serial.print(0);
    }
    else
    {
     lcd.setCursor(0,1);
     lcd.print("Human:Yes");
+    Serial.print(1);
    }
-   Serial.print(X);
-   Serial.print(",");
+   
    Serial.println();
 }
-// LCD Function
+
 
 
 ///////////////Main funtion///////////////
@@ -148,14 +150,16 @@ while(1)
     LIGHT();
     delay(1000);
     lcd.clear();
+     
+    REED();
+    delay(1000);
+    lcd.clear();
     
     PIR();
     delay(1000);
     lcd.clear();
     
-    REED();
-    delay(1000);
-    lcd.clear();
+
     
   }
 }
