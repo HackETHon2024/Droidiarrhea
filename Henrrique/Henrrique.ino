@@ -22,7 +22,7 @@ void setup()
    pinMode(P, INPUT);
    pinMode(R, INPUT);
    pinMode(X, INPUT);
-   Serial.begin(9600);
+   Serial.begin(9600);// start sending data to computer via USB
 
 }
 
@@ -32,11 +32,12 @@ void TEMPERATURE()
 {
   int value_temp=analogRead(T); //reading from A2 pin
   delay(10);
-  float milivolts_temp=((value_temp/1024.0)*5000); // (sensor reading)/ADC*Voltage
+  float milivolts_temp=((value_temp/1024.0)*3300); // (sensor reading)/ADC*Voltage
   float CELSIUS=milivolts_temp/10.0;
   lcd.setCursor(0,0); // column, row
   lcd.print("Temp:");
   lcd.print(CELSIUS);
+  // send temperature data to USB
   Serial.print(CELSIUS);
   Serial.print(",");
 }
@@ -51,6 +52,7 @@ void LIGHT()
   lcd.print("Light:");
   lcd.print(LIGHT);
   lcd.print(" lux");
+  // send data to USB
   Serial.print(LIGHT);
   Serial.print(",");
 }
@@ -101,12 +103,14 @@ void REED()
   {
     lcd.setCursor(0,1);
     lcd.print("Magnet:Yes");
+    // send data to USB - 0 for no, 1 for yes
     Serial.print(1);
   }
   else
   {
     lcd.setCursor(0,0);
     lcd.print("Magnet:No");
+    // send data to USB - 0 for no, 1 for yes
     Serial.print(0);
   }
   Serial.print(",");
@@ -119,15 +123,17 @@ void PIR()
    {
     lcd.setCursor(0,0);
     lcd.print("Human:No");
+    // send data to USB - 0 for no, 1 for yes
     Serial.print(0);
    }
    else
    {
     lcd.setCursor(0,1);
     lcd.print("Human:Yes");
+    // send data to USB - 0 for no, 1 for yes
     Serial.print(1);
    }
-   
+   // send next line to USB - this is for the .csv file
    Serial.println();
 }
 
