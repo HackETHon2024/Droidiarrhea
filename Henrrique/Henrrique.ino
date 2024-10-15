@@ -22,7 +22,7 @@ void setup()
    pinMode(P, INPUT);
    pinMode(R, INPUT);
    pinMode(X, INPUT);
-   Serial.begin(9600);// start sending data to computer via USB
+   Serial.begin(115200);// start sending data to computer via USB at high baud rate
 
 }
 

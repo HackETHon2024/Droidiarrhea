@@ -16,7 +16,7 @@ log_count = 1
 
 #Serial
 
-SerialObj = serial.Serial('/dev/ttyUSB0',9600)
+SerialObj = serial.Serial('/dev/ttyUSB0',115200)
 # Both Arduino and Python are sharing the serial port
 # Opening the serial port from python will reset the arduino
 # 5 second delay will allow the Arduino to settle down
